@@ -15,7 +15,7 @@ This project analyzes global health shipments using PostgreSQL, Tableau, and mac
 
 ## Project Links
 
-- [Interactive Tableau Dashboard](https://public.tableau.com/app/profile/salome.ho8129/viz/GlobalHealthSupplyChainDelivery/GlobalHealthySupplyChainDeliveryPerformance)
+- [Interactive Tableau Dashboard](https://public.tableau.com/app/profile/salome.ho8129/viz/GlobalHealthSupplyChainDeliveryAnalytics/GlobalHealthySupplyChainDeliveryPerformance)
 - [Late Shipment Classifier Notebook](modeling/01_late_shipment_classifier.ipynb)
 
 ## Data Sources
@@ -38,6 +38,8 @@ PostgreSQL, SQL, Docker, Python, Pandas, scikit-learn, Matplotlib, Jupyter Noteb
 
 
 ## Late-Shipment Classifier
+
+Logistic regression and histogram-based gradient boosting were compared on the validation set; gradient boosting performed marginally better and was used for final testing.
 
 The data was split chronologically:
 
@@ -63,6 +65,15 @@ Reviewing the highest-risk 36.7% of shipments captured 63.9% of late deliveries.
 
 ![Permutation Importance](modeling/figures/permutation_importance.png)
 
+## Recommendations
+
+- Review Aurobindo Pharma and CIPLA's Ocean shipments (73–78% on-time) - the weakest vendor-mode combinations found.
+- Treat SCMS from RDC's Truck route as an internal process issue, not a vendor performance problem.
+- Use the classifier to flag the highest-risk 36.7% of shipments for manual review, while considering its precision-recall tradeoff of 22.0% precision and 63.9% recall.
+
 ## Limitations
 
-The dataset ends in 2015 and does not include every factor that may affect delivery, such as customs, infrastructure, emergencies, or contract terms. Results show historical associations, not causation.
+- Numeric freight cost was available for 6,198 of 7,030 shipments. Some remaining records indicated that freight was included in commodity cost, invoiced separately, or recorded under another shipment identifier.
+- "SCMS from RDC" was reclassified as an internal distribution source rather than an external vendor, since including it as a vendor would have distorted vendor comparisons.
+- The dataset ends in 2015 and does not include every factor that may affect delivery, such as customs, infrastructure, emergencies, or contract terms. Results show historical associations, not causation.
+

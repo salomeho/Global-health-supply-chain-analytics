@@ -1,0 +1,2 @@
+model,threshold,test_shipments,late_shipments,roc_auc,pr_auc,late_precision,late_recall,late_f1,alert_rate,true_negatives,false_positives,false_negatives,true_positives
+HistGradientBoostingClassifier,0.40821838293774737,569,72,0.714,0.223,0.22,0.639,0.327,0.3673,334,163,26,46
